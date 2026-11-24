@@ -1,72 +1,81 @@
-# EXPERIMENT 1. EXPLORING NUMPY AND PANDAS
-
+# EXPERIMENT 2: DATA VISUALIZATION USING SEABORN AND MATPLOTLIB
 
 
 ## AIM
 
-
-To understand the use of NumPy and Pandas for performing basic data
-manipulation and analysis in Python.
-
+To visualize data using Matplotlib and Seaborn libraries.
 
 ## ALGORITHM
 
-
-1.  Import the NumPy library for matrix and numerical operations.
-2.  Define a two-dimensional square matrix `A` and a vector `b`.
-3.  Compute the transpose of matrix `A` to interchange rows and columns.
-4.  Calculate the inverse of matrix `A` using `np.linalg.inv(A)` (ensure
-    `A` is non-singular).
-5.  Solve the linear equation `A × x = b` using `np.linalg.solve(A, b)`.
-6.  Perform eigen decomposition to find eigenvalues and eigenvectors
-    using `np.linalg.eig(A)`.
-7.  Display the results for the matrix, transpose, inverse, solution
-    vector, and eigenvalues.
-8.  End the program.
+1.  *Start.*
+2.  Import the Matplotlib and Seaborn libraries.
+3.  Load data into a Pandas DataFrame.
+4.  Plot a histogram for age distribution using plt.hist().
+5.  Plot a scatter plot for Age vs. Salary using sns.scatterplot().
+6.  Plot salary distribution using sns.boxplot().
+7.  Show the plots sequentially.
+8.  *Stop.*
 
 
-
-## FORMULAS / THEORY
-
-
--   **Transpose:** `Aᵀ` --- interchange rows and columns.
--   **Inverse:** `A⁻¹ = adj(A) / |A|`, provided `det(A) ≠ 0`.
--   **Linear system:** `A × x = b  ⇒  x = A⁻¹b`.
--   **Eigen decomposition:** `A v = λ v`, where `λ` is an eigenvalue and
-    `v` is an eigenvector.
-
-    
-
-## CODING 
-
-
+## PROGRAM
+import matplotlib.pyplot as plt  
 import numpy as np  
-A = np.array([[4.0, 2.0],  
-              [1.0, 3.0]])  
-b = np.array([10.0, 8.0])  
-A_transpose = A.T  
-if np.linalg.det(A) != 0:  
-    A_inv = np.linalg.inv(A)  
-else:  
-    raise ValueError("Matrix A is singular and cannot be inverted.")  
-x = np.linalg.solve(A, b)  
-eigenvalues, eigenvectors = np.linalg.eig(A)  
-print("Matrix A:\n", A)  
-print("\nTranspose of A:\n", A_transpose)  
-print("\nInverse of A:\n", A_inv)  
-print("\nSolution vector x:\n", x)  
-print("\nEigenvalues:\n", eigenvalues)  
-print("\nEigenvectors:\n", eigenvectors)  
+import pandas as pd    
+import seaborn as sns    
 
+\# Set a random seed for reproducibility    
+np.random.seed(42)  
+
+\# Load data into a Pandas DataFrame (simulating an employee dataset)    
+print("--- 1. Dataset Initialization ---")    
+data = {    
+    "Age": np.random.randint(22, 60, 100),  
+    "Salary": np.random.randint(35000, 130000, 100),  
+}  
+df = pd.DataFrame(data)    
+print("First 5 rows of the DataFrame:")  
+print(df.head())  
+
+\# Set seaborn style for better aesthetics  
+sns.set_theme(style="whitegrid")  
+
+\# Create a figure to hold the sequential/subplot visualizations    
+plt.figure(figsize=(15, 5))  
+
+\# Plot a histogram for age distribution using plt.hist()  
+plt.subplot(1, 3, 1)  
+plt.hist(df["Age"], bins=8, color="skyblue", edgecolor="black")  
+plt.title("Age Distribution (Histogram)")  
+plt.xlabel("Age")        
+plt.ylabel("Frequency")    
+  
+\# Plot a scatter plot for Age vs. Salary using sns.scatterplot()  
+plt.subplot(1, 3, 2)  
+sns.scatterplot(  
+    x="Age", y="Salary", data=df, color="purple", alpha=0.8, edgecolor="w"  
+)  
+plt.title("Age vs. Salary (Scatter Plot)")  
+plt.xlabel("Age")  
+plt.ylabel("Salary ($)")  
+
+\# Plot salary distribution using sns.boxplot()  
+plt.subplot(1, 3, 3)  
+sns.boxplot(y=df["Salary"], color="lightgreen")  
+plt.title("Salary Distribution (Box Plot)")  
+plt.ylabel("Salary ($)")  
+
+\# Show the plots sequentially / layout adjustment  
+plt.tight_layout()  
+print(    
+    "\n--- 2. Plots Rendered Successfully ---"  
+    "\n(Histograms, scatter plots, and box plots displayed)"  
+)  
+plt.show()  
 
 
 ## OUTPUT
-
-<img width="236" height="348" alt="image" src="https://github.com/user-attachments/assets/74adcd28-6689-4d8d-91f8-2db922a084e7" />
-
+<img width="1367" height="697" alt="image" src="https://github.com/user-attachments/assets/841bdcf8-ee98-4c8d-8579-e251ad0afbf2" />
 
 
-## RESULT 
-
-It flipped the matrix, checked that it could be inverted, found its inverse, solved the equation for x, and calculated its eigenvalues and eigenvectors without any issues.
-
+## RESULT
+Thus to visualize data using Matplotlib and Seaborn libraries successfully.
